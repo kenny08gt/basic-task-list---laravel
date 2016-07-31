@@ -33,6 +33,53 @@
             </div>
         </form>
     </div>
+    <!-- todo -->
+    
+    <!-- Listado de tasks-->
+@if (count($tasks) > 0)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Current Tasks
+            </div>
 
-    <!-- TODO: Current Tasks -->
+            <div class="panel-body">
+                <table class="table table-striped task-table">
+
+                    <!-- Table Headings -->
+                    <thead>
+                        <th>Task</th>
+                        <th>&nbsp;</th>
+                    </thead>
+
+                    <!-- Table Body -->
+                    <tbody>
+                        @foreach ($tasks as $task)
+                            <tr>
+                                <!-- Task Name -->
+                                <td class="table-text">
+                                    <div>{{ $task->name }}</div>
+                                </td>
+
+                                <td>
+                                    <!-- TODO: Delete Button -->
+                                        <!-- Delete Button -->
+                                        <td>
+                                            <form action="{{ url('task/'.$task->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                    
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
 @endsection
