@@ -15,11 +15,7 @@ use App\Task;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    $tasks = Task::orderBy('created_at', 'asc')->get();
-
-    return view('tasks', [
-        'tasks' => $tasks
-    ]);
+    return redirect('inicio');
 });
 /**
  * Add New Task
@@ -40,7 +36,7 @@ Route::post('/task', function (Request $request) {
     $task->name = $request->name;
     $task->save();
 
-    return redirect('');
+    return redirect('inicio');
 });
 
 /**
@@ -50,5 +46,12 @@ Route::delete('/task/{task}', function (Task $task) {
     //
      $task->delete();
 
-    return redirect('');
+    return redirect('inicio');
+});
+
+Route::get('/inicio', function () {
+    $tasks = Task::orderBy('created_at', 'asc')->get();
+    return view('tasks', [
+        'tasks' => $tasks
+    ]);
 });
